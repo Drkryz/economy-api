@@ -1,4 +1,5 @@
 const { Client, Collection } = require('discord.js');
+const mongoose = require('mongoose');
 const fs = require('fs');
 
 const client = new Client();
@@ -16,8 +17,14 @@ for (const file of commandsFolder) {
 
 const PREFIX = "!";
 
-client.on("ready", () => {
+client.on("ready", async() => {
     console.log(`On in ${client.user.tag}`);
+
+    await mongoose.connect("mongodb://localhost:27017/userData?retryWrites=true&w=majority", {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useFindAndModify: true
+    });
 });
 
 // manipuling message
@@ -36,4 +43,4 @@ client.on("message", async (message) => {
     cmd.run(client, message, args);
 });
 
-client.login("your bot token here");
+client.login("token bot here");
