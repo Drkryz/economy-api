@@ -21,8 +21,6 @@
 
 
 const router = require('express').Router();
-const { User } = require('discord.js');
-const { create } = require('../../modules/models/User');
 const UserModel = require('../../modules/models/User');
 
 
@@ -55,7 +53,7 @@ router.get('/:userId', async(req, res) => {
 	} else {
 		const createUser = await UserModel.create({ member: req.params.userId });
 		createUser.save();
-		
+
 		res.status(404).send({
 			msg: "Not Found",
 			reason: "Could not find user or is null"
