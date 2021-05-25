@@ -43,4 +43,4 @@ client.on("message", async (message) => {
     cmd.run(client, message, args);
 });
 
-client.login("token bot here");
+client.login("");
